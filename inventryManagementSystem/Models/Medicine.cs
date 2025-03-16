@@ -15,9 +15,10 @@ namespace inventryManagementSystem.Models
         private DateTime exDatee;
         private DateTime manufacturedDate;
         private bool available;
-        private int amount;
+        private float amount;
+        private float price;
 
-        public Medicine(int id, string name, float dose, string companyName, DateTime exDatee, DateTime manufacturedDate, int amount)
+        public Medicine(int id, string name, float dose, string companyName, DateTime exDatee, DateTime manufacturedDate, float amount, float price)
         {
             this.id = id;
             this.name = name;
@@ -27,9 +28,10 @@ namespace inventryManagementSystem.Models
             this.manufacturedDate = manufacturedDate;
             this.available = true;
             this.amount = amount;
+            this.price = price;
         }
 
-        public string Id
+        public int Id
         {
             get { return id; }
             set { id = value; }
@@ -71,10 +73,16 @@ namespace inventryManagementSystem.Models
             set { available = value; }
         }
 
-        public int Amount
+        public float Amount
         {
             get { return amount; }
             set { amount = value; }
         }
+        public float Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
+
     }
 }

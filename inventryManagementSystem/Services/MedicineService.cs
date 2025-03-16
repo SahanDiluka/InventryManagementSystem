@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using inventryManagementSystem.Models;
 
 namespace inventryManagementSystem.Services
 {
     public class MedicineService
     {
-        private List<Medicine> medicines = new MedicineRecords().GetAllMedicines();
 
+        //making only one time so dont need to create evry time
+        private  static List<Medicine> medicines = new MedicineRecords().GetAllMedicines();
+
+
+        public MedicineService() {
+            setAvailability();
+            
+        }
         public List<Medicine> GetAll()
         {
             return medicines;
@@ -18,47 +26,161 @@ namespace inventryManagementSystem.Services
 
         public Medicine GetMedicineById(int id)
         {
-            throw new NotImplementedException();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Id == id) {  
+                    return medicine;
+                }
+            }
+            return null;
         }
 
         public Medicine GetMedicineByName(string name)
         {
-            throw new NotImplementedException();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Name == name)
+                {
+                    return medicine;
+                }
+            }
+            return null;
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Id == id)
+                {
+                    medicines.Remove(medicine);
+                }
+            }
+        
         }
 
-        public void UpdateMedicine(int id, Medicine medicine)
+        public void UpdateMedicine(int id, Medicine updatedMedicine)
         {
-            throw new NotImplementedException();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Id == id)
+                {
+                    medicines.Equals(updatedMedicine);
+                }
+            }
         }
 
-        public void UpdateMedicine(String name, Medicine medicine)
+        public void UpdateMedicine(String name, Medicine updatedMedicine)
         {
-            throw new NotImplementedException();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Name == name)
+                {
+                    medicines.Equals(updatedMedicine);
+                }
+            }
         }
 
-        internal void Create(int id, string name, float dose, string companyName, DateTime exDate, DateTime manufacturedDate, int amount)
+        public void Create(int id, string name, float dose, string companyName, DateTime exDate, DateTime manufacturedDate, float amount,float price)
         {
-            throw new NotImplementedException();
+            Medicine medicine = new Medicine(id,name,dose,companyName,exDate,manufacturedDate,amount, price);
+            medicines.Add(medicine);
         }
 
-        internal int getAmount(int id)
+        public float getAmount(int id)
         {
-            throw new NotImplementedException();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Id == id)
+                {
+                    return medicine.Amount;
+                }
+            }
+            return 0;
         }
 
-        internal DateTime getExpiredDate(int id)
+        public void setAmount(String name,float amount)
         {
-            throw new NotImplementedException();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Name.Equals(name))
+                {
+                    Console.WriteLine(amount);
+
+                    float amut = medicine.Amount;
+                    Console.WriteLine( "stock amount" + amut);
+                    medicine.Amount = amut - amount;
+
+                    Console.WriteLine(amut - amount);
+                    Console.WriteLine(medicine.Amount);
+
+                    if (medicine.Amount <= 0) {
+                        medicine.Amount = 0;
+                    }
+                }
+            }
+
+            MedicineService service = new MedicineService();
+            service.setAvailability();
+            
         }
 
-        internal float getPrice(int id)
+        public DateTime getExpiredDate(int id)
         {
-            throw new NotImplementedException();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Id == id)
+                {
+                    return medicine.ExDatee;
+                }
+            }
+            return new DateTime(0,0,0);
         }
-    }
+
+        public float getPrice(String name)
+        {
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Name.Equals(name))
+                {
+                    return medicine.Price;
+                }
+            }
+            return 0;
+        }
+
+        public float getDose(string name)
+        {
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Name.Equals(name))
+                {
+                    return medicine.Dose;
+                }
+            }
+            return 0;
+        }
+
+        public List<Medicine> getMedicineByName(string name)
+        {
+            //List Name = string.Format("Convert(Medicine, 'System.String') LIKE '%{0}%'", name);
+            List<Medicine> values = new List<Medicine>();
+            return values;
+        }
+
+       public void setAvailability()
+        {
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.Amount <= 30 || medicine.ExDatee <= DateTime.Today)
+                {
+                    medicine.Available=false;
+                }
+                
+            }
+        }
+
+        
+    }           
+    
 }
