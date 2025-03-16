@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using inventryManagementSystem.Controllers;
+using inventryManagementSystem.Models;
 
 namespace inventryManagementSystem.Views
 {
@@ -84,13 +86,32 @@ namespace inventryManagementSystem.Views
 
                     float amount = (dose / medicineController.GetMedicineDose(name)) * days;
 
-                    medicineController.setamount(name.Trim(), amount);//dosent work
 
-                    Console.WriteLine(name);
-                    Console.WriteLine(amount);
+                    Medicine list = null; 
+                    list = medicineController.FindMedicineByName(name);
 
-                    BillModelController.addBill(id, name, dose, days, amount, price);
 
+
+                    if (list == null)
+                    {
+                        MessageBox.Show("This drug not in the database");
+                    }
+                    else if (list.Amount <= amount) 
+                    {
+
+                        MessageBox.Show("This drug ran out!");
+                    }
+                    else if (list.ExDatee <= DateTime.Today) 
+                    {
+                        MessageBox.Show("This drug expired!");
+                    }
+                    else
+                    {
+
+                        medicineController.setamount(name.Trim(), amount);
+                        BillModelController.addBill(id, name, dose, days, amount, price);
+                    }
+                    
 
 
                     drugDoseTextBox.Text = "";
@@ -98,8 +119,10 @@ namespace inventryManagementSystem.Views
 
                     dataGridView1.DataSource = null;
 
-
+                    
                     dataGridView1.DataSource = BillModelController.getAllBill();
+
+
 
                     DaysOrWeekTextBox.Text = "2";
                     WeekRadioButton.Checked = true;

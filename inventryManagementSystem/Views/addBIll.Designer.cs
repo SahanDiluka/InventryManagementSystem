@@ -56,7 +56,6 @@
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridView1.Size = new System.Drawing.Size(647, 360);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.Visible = false;
             // 
             // label1
             // 
@@ -95,7 +94,7 @@
             this.drugNameTextBox.Name = "drugNameTextBox";
             this.drugNameTextBox.Size = new System.Drawing.Size(257, 36);
             this.drugNameTextBox.TabIndex = 4;
-           
+            // 
             // drugDoseTextBox
             // 
             this.drugDoseTextBox.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

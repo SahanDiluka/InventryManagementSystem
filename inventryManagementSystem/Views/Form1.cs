@@ -71,5 +71,7 @@ namespace inventryManagementSystem
 
             sidePanale.Location = new Point(0, 280);
         }
+
+       
     }
 }
