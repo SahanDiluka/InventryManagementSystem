@@ -26,7 +26,7 @@ namespace inventryManagementSystem.Controllers
             return medicineService.GetMedicineById(id);
         }
 
-        public Medicine FindMedicineByName(String Name)
+        public List<Medicine> FindMedicineByName(String Name)
         {
             return medicineService.GetMedicineByName(Name);
         }
@@ -68,8 +68,8 @@ namespace inventryManagementSystem.Controllers
             return medicineService.getMedicineByName(name);
         }
 
-        public void setamount(String name,float amount) {
-            medicineService.setAmount(name,amount);
+        public void setamount( Medicine medicine,float amount) {
+            medicineService.setAmount(medicine,amount);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using inventryManagementSystem.Models;
 
@@ -35,16 +36,18 @@ namespace inventryManagementSystem.Services
             return null;
         }
 
-        public Medicine GetMedicineByName(string name)
-        {
+        public List<Medicine> GetMedicineByName(string name)
+        {  
+            List<Medicine> list = new List<Medicine>();
+            
             foreach (Medicine medicine in medicines)
             {
                 if (medicine.Name == name)
                 {
-                    return medicine;
+                    list.Add(medicine);
                 }
             }
-            return null;
+            return list;
         }
 
         public void Remove(int id)
@@ -99,24 +102,23 @@ namespace inventryManagementSystem.Services
             return 0;
         }
 
-        public void setAmount(String name,float amount)
+        public void setAmount(Medicine medicine,float amount)
         {
-            foreach (Medicine medicine in medicines)
+            int i = 0;
+
+            foreach (Medicine med in medicines)
             {
-                if (medicine.Name.Equals(name))
+                if (medicine.Equals(med))
                 {
-                    Console.WriteLine(amount);
 
-                    float amut = medicine.Amount;
-                    Console.WriteLine( "stock amount" + amut);
-                    medicine.Amount = amut - amount;
-
-                    Console.WriteLine(amut - amount);
-                    Console.WriteLine(medicine.Amount);
-
-                    if (medicine.Amount <= 0) {
-                        medicine.Amount = 0;
+                    if (med.Amount < 0) { 
+                        med.Amount = amount;
                     }
+                   
+                float amut = medicine.Amount;
+                medicine.Amount = amut - amount;
+                i++; 
+
                 }
             }
 

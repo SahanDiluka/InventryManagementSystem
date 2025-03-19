@@ -16,7 +16,7 @@ namespace inventryManagementSystem.Services
         {
             
 
-            Medicine med1 = new Medicine(001, "Paracetamol", 20f, "ABC Pharma",
+            Medicine med1 = new Medicine(001, "Paracetamol", 20f, "ABC helth",
                                          new DateTime(2025, 12, 31), new DateTime(2023, 06, 15), 100, 10);
 
             Medicine med2 = new Medicine(002, "Ibuprofen", 200f, "XYZ Meds",
@@ -76,6 +76,16 @@ namespace inventryManagementSystem.Services
             Medicine med20 = new Medicine(020, "Ibuprofen", 300f, "PharmaPlus",
                                           new DateTime(2027, 04, 22), new DateTime(2024, 05, 01), 75, 10);
 
+
+            Medicine med21 = new Medicine(021, "Paracetamol", 20f, "ABC",
+                                         new DateTime(2025, 12, 31), new DateTime(2023, 06, 15), 100, 10);
+
+            Medicine med22 = new Medicine(001, "Paracetamol", 20f, "helth",
+                                      new DateTime(2025, 12, 31), new DateTime(2023, 06, 15), 100, 10);
+
+
+
+
             // Add all medicines to the list
             medicineList.Add(med1);
             medicineList.Add(med2);
@@ -97,7 +107,8 @@ namespace inventryManagementSystem.Services
             medicineList.Add(med18);
             medicineList.Add(med19);
             medicineList.Add(med20);
-
+            medicineList.Add(med21);
+            medicineList.Add(med22);
         }
 
 

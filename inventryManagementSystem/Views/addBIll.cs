@@ -34,8 +34,6 @@ namespace inventryManagementSystem.Views
         public void startUpDataGridView() {
             DaysOrWeekTextBox.Text = "2";
             WeekRadioButton.Checked = true;
-          
-
 
         }
 
@@ -87,31 +85,28 @@ namespace inventryManagementSystem.Views
                     float amount = (dose / medicineController.GetMedicineDose(name)) * days;
 
 
-                    Medicine list = null; 
-                    list = medicineController.FindMedicineByName(name);
+                    List<Medicine> list = medicineController.FindMedicineByName(name);
 
-
-
-                    if (list == null)
+                    if (list == null || list.Count == 0)
                     {
-                        MessageBox.Show("This drug not in the database");
-                    }
-                    else if (list.Amount <= amount) 
-                    {
-
-                        MessageBox.Show("This drug ran out!");
-                    }
-                    else if (list.ExDatee <= DateTime.Today) 
-                    {
-                        MessageBox.Show("This drug expired!");
+                        MessageBox.Show("This drug is not in the database");
                     }
                     else
                     {
+                        Medicine availableMedicine = list.FirstOrDefault(n => n.Amount > amount && n.ExDatee > DateTime.Today && n.Amount > 30);
 
-                        medicineController.setamount(name.Trim(), amount);
-                        BillModelController.addBill(id, name, dose, days, amount, price);
+                        if (availableMedicine == null)
+                        {
+                            MessageBox.Show("This drug is either out of stock or expired!");
+                        }
+                        else
+                        {
+                            medicineController.setamount(availableMedicine, amount);
+                            BillModelController.addBill(id, availableMedicine.Name, dose, days, amount, price);
+                        }
                     }
-                    
+
+
 
 
                     drugDoseTextBox.Text = "";
