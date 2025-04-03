@@ -30,7 +30,7 @@ namespace inventryManagementSystem.Views
             List<Medicine> notAavalble = new List<Medicine> { };
 
             foreach (Medicine me in medicines) {
-                if (me.Amount <= 30) { 
+                if (me.Amount <= 30 && me.ExDatee >= DateTime.Today) { 
                     notAavalble.Add(me);
                 }
             }

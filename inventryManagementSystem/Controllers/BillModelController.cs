@@ -16,8 +16,8 @@ namespace inventryManagementSystem.Controllers
             return billModelService.getAll();
         }
 
-        public void addBill(int id, string name, float dose, int days, float amount, float price) {
-            billModelService.add(id,  name,  dose, days,  amount, price);
+        public void addBill(int id, string name, float dose, int days, float amount, float price,DateTime date) {
+            billModelService.add(id,  name,  dose, days,  amount, price,date);
         }
 
         public void removeBill(int id) {
@@ -27,5 +27,19 @@ namespace inventryManagementSystem.Controllers
         public float getPrice() {
             return billModelService.fullPrice();
         }
+        public List<BillModel> getAllsummary()
+        {
+            return billModelService.getAllsummary();
+        }
+        public void clear() { 
+            billModelService.clear();
+        }
+
+        public int getMaxId()
+        {
+            return billModelService.GetMaxBillId();
+        }
+
+        
     }
 }

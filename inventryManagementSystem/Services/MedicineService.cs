@@ -13,11 +13,13 @@ namespace inventryManagementSystem.Services
     {
 
         //making only one time so dont need to create evry time
-        private  static List<Medicine> medicines = new MedicineRecords().GetAllMedicines();
+        MedicineDatabase MedicineDatabase  = new MedicineDatabase();
+        private  static List<Medicine> medicines = MedicineDatabase.GetAllMedicines();
 
 
         public MedicineService() {
             setAvailability();
+            
             
         }
         public List<Medicine> GetAll()
@@ -52,15 +54,18 @@ namespace inventryManagementSystem.Services
 
         public void Remove(int id)
         {
-            foreach (Medicine medicine in medicines)
+            for (int i = 0; i < medicines.Count; i++)
             {
-                if (medicine.Id == id)
+                if (medicines[i].Id == id)
                 {
-                    medicines.Remove(medicine);
+                    medicines.RemoveAt(i);
+                    MedicineDatabase.DeleteMedicineById(id);
+                    // Adjust the index because the collection is now shorter
+                    i--;
                 }
             }
-        
         }
+
 
         public void UpdateMedicine(int id, Medicine updatedMedicine)
         {
@@ -68,7 +73,8 @@ namespace inventryManagementSystem.Services
             {
                 if (medicine.Id == id)
                 {
-                    medicines.Equals(updatedMedicine);
+
+                    MedicineDatabase.UpdateMedicineById(id, updatedMedicine);
                 }
             }
         }
@@ -80,6 +86,7 @@ namespace inventryManagementSystem.Services
                 if (medicine.Name == name)
                 {
                     medicines.Equals(updatedMedicine);
+                    MedicineDatabase.UpdateMedicineByName(name, updatedMedicine);
                 }
             }
         }
@@ -88,6 +95,12 @@ namespace inventryManagementSystem.Services
         {
             Medicine medicine = new Medicine(id,name,dose,companyName,exDate,manufacturedDate,amount, price);
             medicines.Add(medicine);
+            MedicineDatabase.Create(id, name, dose, companyName, exDate, manufacturedDate, amount, price);
+        }
+        public Medicine CreateOne(int id, string name, float dose, string companyName, DateTime exDate, DateTime manufacturedDate, float amount, float price)
+        {
+            Medicine medicine = new Medicine(id, name, dose, companyName, exDate, manufacturedDate, amount, price);
+             return medicine;
         }
 
         public float getAmount(int id)
@@ -116,7 +129,10 @@ namespace inventryManagementSystem.Services
                     }
                    
                 float amut = medicine.Amount;
-                medicine.Amount = amut - amount;
+                float newAmount = amut - amount;
+                 medicine.Amount = newAmount;
+
+                MedicineDatabase.UpdateMedicineAmount(medicine.Id,newAmount);
                 i++; 
 
                 }
@@ -177,12 +193,43 @@ namespace inventryManagementSystem.Services
                 if (medicine.Amount <= 30 || medicine.ExDatee <= DateTime.Today)
                 {
                     medicine.Available=false;
+                    MedicineDatabase.UpdateMedicineAvailability(medicine.Id,false);
                 }
                 
             }
         }
 
-        
+        public int getMAxId()
+        {
+           if(medicines.Count == 0)
+            {
+                return 0;
+            }
+
+           return medicines.Max(m => m.Id);
+        }
+
+        public bool checkIfEqual(Medicine me)
+        {
+            foreach(Medicine med in medicines)
+            {
+                if(me.Id == med.Id && me.Name.Equals(med.Name) && me.Dose == med.Dose && 
+                    me.ExDatee == med.ExDatee && me.ManufacturedDate == med.ManufacturedDate &&
+                    me.Price == med.Price)
+                {
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
+
+        public void addAmount(Medicine medicine, float amount)
+        {
+            medicine.Amount += amount; // Add back the amount
+            MedicineDatabase.UpdateMedicineById(medicine.Id, medicine);  // Save changes to database
+        }
     }           
     
 }

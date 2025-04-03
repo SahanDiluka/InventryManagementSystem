@@ -78,6 +78,7 @@
             this.summaryBtn.TabIndex = 5;
             this.summaryBtn.Text = "SUMMRY";
             this.summaryBtn.UseVisualStyleBackColor = false;
+            this.summaryBtn.Click += new System.EventHandler(this.summaryBtn_Click);
             // 
             // lowStockBtn
             // 
@@ -125,6 +126,7 @@
             this.addStockBtn.TabIndex = 2;
             this.addStockBtn.Text = "ADD STOCK";
             this.addStockBtn.UseVisualStyleBackColor = false;
+            this.addStockBtn.Click += new System.EventHandler(this.addStockBtn_Click);
             // 
             // checkStockBtn
             // 

@@ -72,6 +72,26 @@ namespace inventryManagementSystem
             sidePanale.Location = new Point(0, 280);
         }
 
-       
+        private void addStockBtn_Click(object sender, EventArgs e)
+        {
+            loadPanle.Controls.Clear();
+            loadPanle.BringToFront();
+            AddStock addStock = new AddStock();
+            addStock.Dock = DockStyle.Fill;
+            loadPanle.Controls.Add(addStock);
+
+            sidePanale.Location = new Point(0, 220);
+        }
+
+        private void summaryBtn_Click(object sender, EventArgs e)
+        {
+            loadPanle.Controls.Clear();
+            loadPanle.BringToFront();
+            Summary summary = new Summary();
+            summary.Dock = DockStyle.Fill;
+            loadPanle.Controls.Add(summary);
+
+            sidePanale.Location = new Point(0, 400);
+        }
     }
 }

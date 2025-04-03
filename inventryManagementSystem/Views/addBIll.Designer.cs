@@ -39,9 +39,11 @@
             this.daysRadioButton = new System.Windows.Forms.RadioButton();
             this.addMoreBtn = new System.Windows.Forms.Button();
             this.doneBtn = new System.Windows.Forms.Button();
-            this.labelPriceIs = new System.Windows.Forms.Label();
             this.labelPrice = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.clearBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -54,7 +56,7 @@
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView1.Size = new System.Drawing.Size(647, 360);
+            this.dataGridView1.Size = new System.Drawing.Size(744, 360);
             this.dataGridView1.TabIndex = 0;
             // 
             // label1
@@ -94,6 +96,7 @@
             this.drugNameTextBox.Name = "drugNameTextBox";
             this.drugNameTextBox.Size = new System.Drawing.Size(257, 36);
             this.drugNameTextBox.TabIndex = 4;
+            this.drugNameTextBox.TextChanged += new System.EventHandler(this.drugNameTextBox_TextChanged);
             // 
             // drugDoseTextBox
             // 
@@ -157,17 +160,6 @@
             this.doneBtn.UseVisualStyleBackColor = true;
             this.doneBtn.Click += new System.EventHandler(this.doneBtn_Click);
             // 
-            // labelPriceIs
-            // 
-            this.labelPriceIs.AutoSize = true;
-            this.labelPriceIs.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPriceIs.Location = new System.Drawing.Point(450, 508);
-            this.labelPriceIs.Name = "labelPriceIs";
-            this.labelPriceIs.Size = new System.Drawing.Size(85, 28);
-            this.labelPriceIs.TabIndex = 11;
-            this.labelPriceIs.Text = "Price is ";
-            this.labelPriceIs.Visible = false;
-            // 
             // labelPrice
             // 
             this.labelPrice.AutoSize = true;
@@ -177,12 +169,38 @@
             this.labelPrice.Size = new System.Drawing.Size(0, 28);
             this.labelPrice.TabIndex = 12;
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(171, 141);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(254, 136);
+            this.dataGridView2.TabIndex = 13;
+            this.dataGridView2.Visible = false;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            // 
+            // clearBtn
+            // 
+            this.clearBtn.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearBtn.Location = new System.Drawing.Point(453, 485);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(75, 37);
+            this.clearBtn.TabIndex = 14;
+            this.clearBtn.Text = "Clear";
+            this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            // 
             // addBIll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.clearBtn);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.labelPrice);
-            this.Controls.Add(this.labelPriceIs);
             this.Controls.Add(this.doneBtn);
             this.Controls.Add(this.addMoreBtn);
             this.Controls.Add(this.daysRadioButton);
@@ -196,8 +214,9 @@
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "addBIll";
-            this.Size = new System.Drawing.Size(1115, 709);
+            this.Size = new System.Drawing.Size(1217, 709);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,7 +235,8 @@
         private System.Windows.Forms.RadioButton daysRadioButton;
         private System.Windows.Forms.Button addMoreBtn;
         private System.Windows.Forms.Button doneBtn;
-        private System.Windows.Forms.Label labelPriceIs;
         private System.Windows.Forms.Label labelPrice;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button clearBtn;
     }
 }

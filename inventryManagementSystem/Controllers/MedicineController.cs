@@ -17,7 +17,7 @@ namespace inventryManagementSystem.Controllers
         {
             return medicineService.GetAll();
         }
-        public void CreateMedicine(int id, string name, float dose, string companyName, DateTime exDate, DateTime manufacturedDate, int amount,float price)
+        public void CreateMedicine(int id, string name, float dose, string companyName, DateTime exDate, DateTime manufacturedDate, float amount,float price)
         {
             medicineService.Create(id,name,dose,companyName,exDate,manufacturedDate,amount,price);
         }
@@ -71,5 +71,25 @@ namespace inventryManagementSystem.Controllers
         public void setamount( Medicine medicine,float amount) {
             medicineService.setAmount(medicine,amount);
         }
+
+        public int getMaxId()
+        {
+            return medicineService.getMAxId();
+        }
+
+        public bool checkIfEqual(Medicine medicine)
+        {
+            return medicineService.checkIfEqual(medicine);
+        }
+
+        public Medicine makeOneMed(int id, string name, float dose, string companyName, DateTime exDate, DateTime manufacturedDate, float amount, float price)
+        {
+            return medicineService.CreateOne(id, name, dose, companyName, exDate, manufacturedDate, amount, price);
+        }
+        public void addAmount(Medicine medicine, float amount)
+        {
+            medicineService.addAmount(medicine, amount);
+        }
+
     }
 }
